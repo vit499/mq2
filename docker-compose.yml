@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  vit497_mq2_front:
+    build:
+      context: ./front
+    container_name: vit497_mq2_front
+    #    command: serve -s build -l 31001
+    command: serve -s dist -l 31002
+    restart: unless-stopped
+    ports:
+      - "31002:31002"
+    logging:
+      options:
+        max-size: 10m
+    networks:
+      - v1-network
+
+networks:
+  v1-network:
+    external: true
