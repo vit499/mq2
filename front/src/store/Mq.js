@@ -101,7 +101,7 @@ class Mq {
           this._connectStatus = "Connect";
           this._isSub = false;
           this._client = null;
-          temperStore.clear();
+          temperStore.clearAll();
         });
       });
     }
@@ -110,7 +110,7 @@ class Mq {
     if (this._client) {
       const qos = 1;
       const { indObj, payload } = context;
-      temperStore.clear();
+      temperStore.clear(indObj);
       const topicPub = this.formTopicPub(indObj);
       this._client.publish(topicPub, payload, { qos }, (error) => {
         runInAction(() => {
@@ -130,7 +130,7 @@ class Mq {
       //  this._login + "/" + this._numObject + "/devrec/control";
       const qos = 1;
       const { payload } = context;
-      temperStore.clear();
+      temperStore.clearAll();
       const topicPub1 = this.formTopicPub(0);
       this._client.publish(topicPub1, payload, { qos }, (error) => {
         runInAction(() => {

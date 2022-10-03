@@ -32,7 +32,15 @@ class DevSend {
     if (ind < 2) this._nvobj[ind].nobj = nobj;
   }
 
-  clear() {
+  clear(indObj) {
+    this._nvobj[indObj].fout = [];
+    this._nvobj[indObj].ftout = [];
+    this._nvobj[indObj].sout = [];
+    this._nvobj[indObj].indtemp = [];
+    this._nvobj[indObj].temper = [0x80, 0x80, 0x80];
+    this._nvobj[indObj].valid = false;
+  }
+  clearAll() {
     this._nvobj.forEach((o) => {
       o.fout = [];
       o.ftout = [];

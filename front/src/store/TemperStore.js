@@ -48,8 +48,19 @@ class TemperStore {
     devSend.fillNobj(ind, nobj);
   }
 
-  clear() {
-    devSend.clear();
+  clear(indObj) {
+    devSend.clear(indObj);
+    runInAction(() => {
+      this._nvobj[indObj].fout = [0, 0, 0, 0];
+      this._nvobj[indObj].ftout = [0, 0, 0, 0];
+      this._nvobj[indObj].sout = [0, 0, 0, 0];
+      this._nvobj[indObj].indtemp = [0, 0, 0, 0];
+      this._nvobj[indObj].temper = [0x80, 0x80, 0x80];
+      this._nvobj[indObj].valid = false;
+    });
+  }
+  clearAll() {
+    devSend.clearAll();
     runInAction(() => {
       this._nvobj.forEach((o) => {
         o.fout = [0, 0, 0, 0];
