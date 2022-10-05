@@ -6,13 +6,13 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ErrorPage from "./pages/ErrorPage";
 import LoginPage from "./pages/LoginPage";
-// import {
-//   ABOUT_ROUTE,
-//   HOME_ROUTE,
-//   SETT_ROUTE,
-//   LOGIN_ROUTE,
-// } from "./components/router/constRouter";
-import AdminPage from "./pages/AdminPage";
+import OutPage from "./pages/OutPage";
+import TemperComp from "./components/outs/TemperComp";
+import OutModernPage from "./pages/Modern/OutModernPage";
+import HostPage from "./pages/HostPage";
+import Description from "./components/mqtt/Description";
+import mq from "./store/Mq";
+import { useEffect } from "react";
 //import router from "./components/router/routes";
 
 const router = createBrowserRouter([
@@ -31,14 +31,34 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "/sett",
-        element: <AdminPage />,
+        path: "/host",
+        element: <HostPage />,
+      },
+      {
+        path: "/out/:indObj/:indOut",
+        element: <OutPage />,
+      },
+      {
+        path: "/outmodern/:indObj/:indOut",
+        element: <OutModernPage />,
+      },
+      {
+        path: "/temper",
+        element: <TemperComp />,
+      },
+      {
+        path: "/descr",
+        element: <Description />,
       },
     ],
   },
 ]);
 
 function App() {
+  useEffect(() => {
+    // mq.mqttConnect();
+    return () => mq.mqttDisconnect();
+  }, []);
   return <RouterProvider router={router} />;
 }
 

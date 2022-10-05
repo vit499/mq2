@@ -2,10 +2,9 @@ import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import mq from "../../store/Mq";
 import temperStore from "../../store/TemperStore";
-import Loading from "./Loading";
-import TemperComp from "./TemperComp";
+import TemperCompModern from "./TemperCompModern";
 
-const SetOut2 = observer(({ indObj, indOut }) => {
+const SetOutModern = observer(({ indObj, indOut }) => {
   const [temperOn, setTemperOn] = useState(0);
   const [temperOnInit, setTemperOnInit] = useState(false); //
   const onPlus = () => {
@@ -88,7 +87,7 @@ const SetOut2 = observer(({ indObj, indOut }) => {
                     Установить
                   </button>
                 </div>
-                <TemperComp indObj={indObj} indOut={indOut} />
+                <TemperCompModern indObj={indObj} indOut={indOut} />
               </div>
               {/* --pult-- */}
             </>
@@ -99,4 +98,4 @@ const SetOut2 = observer(({ indObj, indOut }) => {
   );
 });
 
-export default SetOut2;
+export default SetOutModern;

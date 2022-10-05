@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
+import descrStore from "../../store/DescrStore";
 import mq from "../../store/Mq";
 import temperStore from "../../store/TemperStore";
 
@@ -38,14 +39,12 @@ const SetOut = observer(({ indObj, indOut }) => {
             <>
               <div className="mb-2">
                 {temperStore._nvobj[indObj].sout[indOut] !== 0 ? (
-                  <div style={{ backgroundColor: "pink" }}>{`${
-                    temperStore._nvobj[indObj].nobj
-                  } Выход ${indOut + 1} включен`}</div>
+                  <div
+                    style={{ backgroundColor: "pink" }}
+                  >{`обогрев ${descrStore.outs[indObj][indOut]} включен`}</div>
                 ) : (
                   <div style={{ backgroundColor: "#dddddd" }}>
-                    {`${temperStore._nvobj[indObj].nobj} Выход ${
-                      indOut + 1
-                    } выключен`}
+                    {`обогрев ${descrStore.outs[indObj][indOut]} выключен`}
                   </div>
                 )}
               </div>

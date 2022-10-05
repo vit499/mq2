@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import MqttComp from "../components/mqtt/MqttComp";
+import Connection from "../components/mqtt/Connection";
 import SetOut from "../components/outs/SetOut";
 import TemperComp from "../components/outs/TemperComp";
 import { LOGIN_ROUTE } from "../components/router/constRouter";
@@ -10,10 +10,10 @@ import mq from "../store/Mq";
 import temperStore from "../store/TemperStore";
 
 const HomePage = observer(() => {
-  useEffect(() => {
-    // mq.mqttConnect();
-    return () => mq.mqttDisconnect();
-  }, []);
+  // useEffect(() => {
+  //   // mq.mqttConnect();
+  //   return () => mq.mqttDisconnect();
+  // }, []);
 
   return (
     <div className="container">
@@ -28,7 +28,7 @@ const HomePage = observer(() => {
       {authStore.isAuth && (
         <div>
           <br />
-          <MqttComp />
+          <Connection />
           <SetOut indObj={0} indOut={1} />
           <SetOut indObj={1} indOut={1} />
           <SetOut indObj={1} indOut={2} />

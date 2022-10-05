@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 //import mqtt from "mqtt";
 import * as mqtt from "mqtt/dist/mqtt.min";
+import descrStore from "./DescrStore";
 import hostStore from "./HostStore";
 import temperStore from "./TemperStore";
 
@@ -8,6 +9,7 @@ class Mq {
   _connectStatus;
   constructor() {
     hostStore.getHostFromStorage();
+    descrStore.getDescrFromStorage();
     this._client = null;
     this._isSub = false;
     this._listMessage = [];
@@ -206,7 +208,7 @@ class Mq {
       protocolId: "MQTT",
       protocolVersion: 4,
       clean: true,
-      reconnectPeriod: 5000,
+      reconnectPeriod: 0,
       connectTimeout: 10 * 1000,
     };
     options.clientId = clientId;
