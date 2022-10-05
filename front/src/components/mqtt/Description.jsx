@@ -8,43 +8,41 @@ const Description = observer(() => {
   };
   return (
     <div className="container">
-      <div className="mb-2 row">
-        <label className="col-sm-2">объект1 выход1</label>
-        <div className="col-sm-2">
-          <input
-            onChange={(v) => descrStore.setDescrOut(0, 0, v)}
-            value={descrStore.outs[0][0]}
-          />
+      {descrStore.outs.map((obj, indObj) => (
+        <div key={indObj}>
+          {obj.map((out, indOut) => (
+            <div key={indOut} className="mb-2 row">
+              <label className="col-sm-2">{`объект${indObj + 1} выход${
+                indOut + 1
+              }`}</label>
+              <div className="col-sm-2">
+                <input
+                  onChange={(v) => descrStore.setDescrOut(indObj, indOut, v)}
+                  value={descrStore.outs[indObj][indOut]}
+                />
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-      <div className="mb-2 row">
-        <label className="col-sm-2">объект1 выход2</label>
-        <div className="col-sm-2">
-          <input
-            onChange={(v) => descrStore.setDescrOut(0, 1, v)}
-            value={descrStore.outs[0][1]}
-          />
+      ))}
+      <hr />
+      {descrStore.tempers.map((obj, indObj) => (
+        <div key={indObj}>
+          {obj.map((out, indOut) => (
+            <div key={indOut} className="mb-2 row">
+              <label className="col-sm-2">{`объект${indObj + 1} датчик${
+                indOut + 1
+              }`}</label>
+              <div className="col-sm-2">
+                <input
+                  onChange={(v) => descrStore.setDescrTemper(indObj, indOut, v)}
+                  value={descrStore.tempers[indObj][indOut]}
+                />
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-
-      <div className="mb-2 row">
-        <label className="col-sm-2">объект2 выход2</label>
-        <div className="col-sm-2">
-          <input
-            onChange={(v) => descrStore.setDescrOut(1, 1, v)}
-            value={descrStore.outs[1][1]}
-          />
-        </div>
-      </div>
-      <div className="mb-2 row">
-        <label className="col-sm-2">объект2 выход3</label>
-        <div className="col-sm-2">
-          <input
-            onChange={(v) => descrStore.setDescrOut(1, 2, v)}
-            value={descrStore.outs[1][2]}
-          />
-        </div>
-      </div>
+      ))}
 
       <div className="mb-2 row">
         <label className="col-sm-2"></label>
