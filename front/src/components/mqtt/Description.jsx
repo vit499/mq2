@@ -28,15 +28,17 @@ const Description = observer(() => {
       <hr />
       {descrStore.tempers.map((obj, indObj) => (
         <div key={indObj}>
-          {obj.map((out, indOut) => (
-            <div key={indOut} className="mb-2 row">
+          {obj.map((temper, indTemper) => (
+            <div key={indTemper} className="mb-2 row">
               <label className="col-sm-2">{`объект${indObj + 1} датчик${
-                indOut + 1
+                indTemper + 1
               }`}</label>
               <div className="col-sm-2">
                 <input
-                  onChange={(v) => descrStore.setDescrTemper(indObj, indOut, v)}
-                  value={descrStore.tempers[indObj][indOut]}
+                  onChange={(v) =>
+                    descrStore.setDescrTemper(indObj, indTemper, v)
+                  }
+                  value={descrStore.tempers[indObj][indTemper]}
                 />
               </div>
             </div>

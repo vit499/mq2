@@ -63,7 +63,9 @@ class DescrStore {
   }
   setDescrTemper(obj, t, e) {
     const d = e.target.value;
-    this.outs[obj][t] = d;
+    runInAction(() => {
+      this.tempers[obj][t] = d;
+    });
   }
   getDescrOut(obj, out) {
     return this.outs[obj][out];
