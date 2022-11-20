@@ -38,8 +38,11 @@ class Mq {
     this._topicSub = hostStore.login + "/" + hostStore.obj1 + "/devsend/#";
     this._topicPub = hostStore.login + "/" + hostStore.obj1 + "/devrec/control";
     this._topicSub2 = hostStore.login + "/" + hostStore.obj2 + "/devsend/#";
+    this._topicSub3 = hostStore.login + "/" + hostStore.obj3 + "/devsend/#";
     this._topicPub2 =
       hostStore.login + "/" + hostStore.obj2 + "/devrec/control";
+    this._topicPub3 =
+      hostStore.login + "/" + hostStore.obj3 + "/devrec/control";
   }
   formTopicPub(indObj) {
     const topic =
@@ -153,6 +156,16 @@ class Mq {
           }
         });
       });
+      const topicPub3 = this.formTopicPub(2);
+      this._client.publish(topicPub3, payload, { qos }, (error) => {
+        runInAction(() => {
+          if (error) {
+            console.log("Publish3 error: ", error);
+          } else {
+            console.log(`${topicPub3} ${payload} `);
+          }
+        });
+      });
     }
   }
 
@@ -163,7 +176,7 @@ class Mq {
       const qos = 1;
       //const { topic, qos } = subscription;
       this._client.subscribe(
-        [this._topicSub, this._topicSub2],
+        [this._topicSub, this._topicSub2, this._topicSub3],
         { qos },
         (error) => {
           if (error) {
@@ -185,7 +198,7 @@ class Mq {
   mqttUnSub() {
     if (this._client) {
       //const { topic } = subscription;
-      this._client.unsubscribe([this._topicSub, this._topicSub2], (error) => {
+      this._client.unsubscribe([this._topicSub, this._topicSub2, this._topicSub3], (error) => {
         runInAction(() => {
           if (error) {
             console.log("Unsubscribe error", error);

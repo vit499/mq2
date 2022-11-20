@@ -46,6 +46,15 @@ const Settings = observer(() => {
         </div>
       </div>
       <div className="mb-2 row">
+        <label className="col-sm-2">Object</label>
+        <div className="col-sm-2">
+          <input
+            onChange={(v) => hostStore.setObj3(v)}
+            value={hostStore.obj3}
+          />
+        </div>
+      </div>
+      <div className="mb-2 row">
         <label className="col-sm-2">Login</label>
         <div className="col-sm-2">
           <input

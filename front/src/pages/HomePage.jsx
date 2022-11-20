@@ -32,6 +32,7 @@ const HomePage = observer(() => {
           <SetOut indObj={0} indOut={1} />
           <SetOut indObj={1} indOut={1} />
           <SetOut indObj={1} indOut={2} />
+          <SetOut indObj={2} indOut={0} />
           <TemperComp />
         </div>
       )}

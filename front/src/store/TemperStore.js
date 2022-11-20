@@ -39,12 +39,22 @@ class TemperStore {
         temper: [0x80, 0x80, 0x80],
         valid: false,
       },
+      {
+        ind: 2,
+        nobj: "0801",
+        fout: [0, 0, 0, 0],
+        ftout: [0, 0, 0, 0],
+        sout: [0, 0, 0, 0],
+        indtemp: [0, 0, 0, 0],
+        temper: [0x80, 0x80, 0x80],
+        valid: false,
+      },
     ];
     makeAutoObservable(this, {});
   }
 
   fillNobj(ind, nobj) {
-    if (ind < 2) this._nvobj[ind].nobj = nobj;
+    if (ind < 3) this._nvobj[ind].nobj = nobj;
     devSend.fillNobj(ind, nobj);
   }
 
@@ -97,6 +107,7 @@ class TemperStore {
     let ind;
     if (this._nvobj[0].nobj === obj.nobj) ind = 0;
     else if (this._nvobj[1].nobj === obj.nobj) ind = 1;
+    else if (this._nvobj[2].nobj === obj.nobj) ind = 2;
 
     runInAction(() => {
       if (obj.fout.length !== 0)

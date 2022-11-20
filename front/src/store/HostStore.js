@@ -15,6 +15,7 @@ class HostStore {
     this.login = "";
     this.obj1 = "";
     this.obj2 = "";
+    this.obj3 = "";
     this.password = "";
     //this.getHostFromStorage();
     makeAutoObservable(this, {});
@@ -31,6 +32,8 @@ class HostStore {
     if (_obj1 === "") _obj1 = "0802";
     let _obj2 = localStorage.getItem("obj2") || "";
     if (_obj2 === "") _obj2 = "0803";
+    let _obj3 = localStorage.getItem("obj3") || "";
+    if (_obj3 === "") _obj2 = "0804";
     let _pass = localStorage.getItem("pass") || "";
 
     this.host = _host;
@@ -38,10 +41,12 @@ class HostStore {
     this.login = _login;
     this.obj1 = _obj1;
     this.obj2 = _obj2;
+    this.obj3 = _obj3;
     this.password = _pass;
     this.updAuthStore();
     temperStore.fillNobj(0, this.obj1);
     temperStore.fillNobj(1, this.obj2);
+    temperStore.fillNobj(2, this.obj3);
   }
 
   saveHostToStorage() {
@@ -49,9 +54,11 @@ class HostStore {
     localStorage.setItem("port", this.port);
     localStorage.setItem("obj1", this.obj1);
     localStorage.setItem("obj2", this.obj2);
+    localStorage.setItem("obj3", this.obj3);
     this.saveLoginToStorage();
     temperStore.fillNobj(0, this.obj1);
     temperStore.fillNobj(1, this.obj2);
+    temperStore.fillNobj(2, this.obj3);
   }
   saveLoginToStorage() {
     localStorage.setItem("login", this.login);
@@ -74,6 +81,10 @@ class HostStore {
   setObj2(v) {
     this.obj2 = v.target.value;
     temperStore.fillNobj(1, this.obj2);
+  }
+  setObj3(v) {
+    this.obj3 = v.target.value;
+    temperStore.fillNobj(2, this.obj3);
   }
   setHost(v) {
     this.host = v.target.value;

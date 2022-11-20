@@ -25,11 +25,20 @@ class DevSend {
         temper: [0x80, 0x80, 0x80],
         valid: false,
       },
+      {
+        nobj: "0801",
+        fout: [],
+        ftout: [],
+        sout: [],
+        indtemp: [],
+        temper: [0x80, 0x80, 0x80],
+        valid: false,
+      },
     ];
   }
 
   fillNobj(ind, nobj) {
-    if (ind < 2) this._nvobj[ind].nobj = nobj;
+    if (ind < 3) this._nvobj[ind].nobj = nobj;
   }
 
   clear(indObj) {
