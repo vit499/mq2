@@ -9,15 +9,6 @@ import devSend from "../utils/devsend";
 // };
 class TemperStore {
   constructor() {
-    // this._temper = 0x80;
-    // this._fout1 = 0;
-    // this._ftout1 = 0;
-    // this._sout1 = 0;
-    // this._fout2 = 0;
-    // this._ftout2 = 0;
-    // this._sout2 = 0;
-    // this._valid = false;
-
     this._nvobj = [
       {
         ind: 0,
@@ -84,16 +75,20 @@ class TemperStore {
   }
   getTemper(indObj, indOut) {
     const indTemper = this._nvobj[indObj].indtemp[indOut];
-    if (this._nvobj[indObj].temper[indTemper] === 0x80) {
+    let t = this._nvobj[indObj].temper[indTemper] & 0xff;
+    if (t === 0x80) {
       return "--";
     }
-    return `${this._nvobj[indObj].temper[indTemper]} (датчик ${indTemper + 1})`;
+    if ((t & (1 << 7)) != 0) t = t - 256;
+    return `${t} (датчик ${indTemper + 1})`;
   }
   getTemperAll() {
     let strRes = "";
     this._nvobj.forEach((o) => {
-      o.temper.forEach((t, ind) => {
+      o.temper.forEach((val, ind) => {
+        let t = val;
         if (t !== 0x80) {
+          if ((t & (1 << 7)) != 0) t = t - 256;
           //strRes.concat(`<br/>${t} (obj${o.ind + 1} sensor${ind + 1})`);
           strRes = strRes + `\r\n ${t} (obj${o.ind + 1} sensor${ind + 1})`;
         }
@@ -132,8 +127,12 @@ class TemperStore {
         });
       obj.temper.forEach((f, i) => {
         if (i < 3) {
+          let t = obj.temper[i] & 0xff;
+          if (t != 0x80) {
+            if ((t & (1 << 7)) != 0) t = t - 256;
+          }
           //console.log(`${o.nobj} temper${i + 1}=${o.temper[i].toString()}`);
-          this._nvobj[ind].temper[i] = obj.temper[i];
+          this._nvobj[ind].temper[i] = t;
         }
       });
       this._nvobj[ind].valid = obj.valid;

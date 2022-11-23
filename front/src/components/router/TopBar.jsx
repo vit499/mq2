@@ -31,11 +31,11 @@ const TopBar = () => {
         <Link className="me-2" to="/out/1/2">
           {descrStore.getDescrOut(1, 2)}
         </Link>
+        <Link className="me-2" to="/out/2/0">
+          {descrStore.getDescrOut(2, 0)}
+        </Link>
         <Link className="me-2" to="/temper">
           T_all
-        </Link>
-        <Link className="me-2" to="/outmodern/1/2">
-          modern
         </Link>
       </div>
       <div>
